@@ -8,8 +8,12 @@ export const routes: Routes = [
         (m) => m.PublicCatalogComponent,
       ),
   },
-  //   {
-  //     path: '**',
-  //     redirectTo: '',
-  //   },
+  {
+    path: 'login',
+    loadComponent: () => import('./features/login/login.component').then((m) => m.LoginComponent),
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
