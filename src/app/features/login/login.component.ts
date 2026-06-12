@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BackendError } from '../../core/models/product.model';
@@ -13,17 +13,26 @@ import { BackendError } from '../../core/models/product.model';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   email = '';
   password = '';
 
   isLoading = signal<boolean>(false);
   errorMessage = signal<string | null>(null);
+  isSessionExpired = signal<boolean>(false);
 
   constructor(
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
   ) {}
+
+  ngOnInit(): void {
+    const expiredParam = this.route.snapshot.queryParamMap.get('expired');
+    if (expiredParam === 'true') {
+      this.isSessionExpired.set(true);
+    }
+  }
 
   onSubmit(): void {
     if (!this.email || !this.password) {
@@ -33,6 +42,7 @@ export class LoginComponent {
 
     this.isLoading.set(true);
     this.errorMessage.set(null);
+    this.isSessionExpired.set(false);
 
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
@@ -49,7 +59,7 @@ export class LoginComponent {
           this.errorMessage.set('No hay conexión con el servidor.');
         } else {
           const backendErr = err.error as BackendError;
-          this.errorMessage.set(backendErr?.message || 'Credenciales inválidas.');
+          this.errorMessage.set('Credenciales inválidas.');
         }
       },
     });

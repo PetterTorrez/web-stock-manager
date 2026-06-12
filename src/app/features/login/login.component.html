@@ -1,10 +1,6 @@
 <div class="login-container">
   <h2>Iniciar Sesión</h2>
 
-  <div *ngIf="errorMessage()" class="alert-error">
-    {{ errorMessage() }}
-  </div>
-
   <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
     <div class="form-group">
       <label for="email">Correo Electrónico:</label>
@@ -30,8 +26,16 @@
       />
     </div>
 
+    <div *ngIf="errorMessage()" class="alert-error">
+      {{ errorMessage() }}
+    </div>
+
     <button type="submit" [disabled]="isLoading() || !loginForm.form.valid">
       {{ isLoading() ? 'Autenticando...' : 'Ingresar al Sistema' }}
     </button>
   </form>
+
+  <div *ngIf="isSessionExpired()" class="alert-warning">
+    Tu sesión ha expirado, por favor ingresa nuevamente.
+  </div>
 </div>
