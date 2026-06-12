@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { BackendError } from '../../core/models/product.model';
 
 @Component({
   selector: 'app-auth-login',
@@ -36,7 +35,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     if (!this.email || !this.password) {
-      this.errorMessage.set('Correo o contraseña invalidos.');
       return;
     }
 
@@ -58,8 +56,7 @@ export class LoginComponent implements OnInit {
         if (err.status === 0) {
           this.errorMessage.set('No hay conexión con el servidor.');
         } else {
-          const backendErr = err.error as BackendError;
-          this.errorMessage.set('Credenciales inválidas.');
+          this.errorMessage.set('Correo y/o contraseña incorrectos.');
         }
       },
     });
