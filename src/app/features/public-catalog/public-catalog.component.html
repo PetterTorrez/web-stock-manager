@@ -1,0 +1,28 @@
+<div class="catalog-container">
+  <h2>Catálogo de Productos</h2>
+
+  <div *ngIf="isLoading()" class="state-loader">
+    <p>Cargando productos disponibles...</p>
+  </div>
+
+  <div *ngIf="errorMessage()" class="state-error">
+    <h3>Error al cargar el catálogo</h3>
+    <p>{{ errorMessage() }}</p>
+    <button class="btn-retry" (click)="loadProducts()">Reintentar conexión</button>
+  </div>
+
+  <div *ngIf="!isLoading() && !errorMessage()">
+    <div *ngIf="products().length === 0" class="state-empty">
+      <p>No hay productos registrados en este momento en la tienda.</p>
+    </div>
+
+    <div *ngIf="products().length > 0" class="products-grid">
+      <div class="product-card" *ngFor="let prod of products()">
+        <h4>{{ prod.name }}</h4>
+        <p class="sku">SKU: {{ prod.sku }}</p>
+        <p class="description">{{ prod.description }}</p>
+        <p class="price">Precio: ${{ prod.price }}</p>
+      </div>
+    </div>
+  </div>
+</div>
