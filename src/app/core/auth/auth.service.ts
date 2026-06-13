@@ -1,8 +1,9 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { LoginRequest, AuthResponse, UserTokenPayload } from '../models/auth.model';
+import { LoginRequest, AuthResponse, UserTokenPayload, ApiResponse } from '../models/auth.model';
 import { environment } from '../../../environments/environment';
+import { USER_ROL } from '../enum/role.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -35,17 +36,28 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: LoginRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
+  login(credentials: LoginRequest): Observable<ApiResponse<AuthResponse>> {
+    return this.http.post<ApiResponse<AuthResponse>>(`${this.apiUrl}/login`, credentials).pipe(
       tap((res) => {
-        localStorage.setItem('jwt_token', res.token);
-        this.tokenSignal.set(res.token);
+        localStorage.setItem('jwt_token', res.data.token);
+        this.tokenSignal.set(res.data.token);
       }),
     );
   }
 
   getToken(): string | null {
     return this.tokenSignal();
+  }
+
+  public decodeRoleFromToken(token: string): USER_ROL.ROLE_ADMIN | USER_ROL.ROLE_ANONYMOUS | null {
+    try {
+      const tokenParts = token.split('.');
+      const JWT_PAYLOAD_INDEX = 1;
+      const payload = JSON.parse(atob(tokenParts[JWT_PAYLOAD_INDEX]));
+      return payload.role || null;
+    } catch {
+      return null;
+    }
   }
 
   logout(): void {

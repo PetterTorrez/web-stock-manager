@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { USER_ROL } from '../../core/enum/role.enum';
 
 @Component({
   selector: 'app-auth-login',
@@ -43,9 +44,11 @@ export class LoginComponent implements OnInit {
     this.isSessionExpired.set(false);
 
     this.authService.login({ email: this.email, password: this.password }).subscribe({
-      next: () => {
+      next: ({ data }) => {
         this.isLoading.set(false);
-        if (this.authService.currentUserRole() === 'ROLE_ADMIN') {
+        const userRole = this.authService.decodeRoleFromToken(data.token);
+
+        if (userRole === USER_ROL.ROLE_ADMIN) {
           this.router.navigate(['/admin']);
         } else {
           this.router.navigate(['/']);
