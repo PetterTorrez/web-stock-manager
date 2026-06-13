@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../core/services/product.service';
-import { Product, BackendError } from '../../core/models/product.models';
+import { Product, BackendError } from '../../core/models/product.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
