@@ -11,7 +11,7 @@ La aplicación incluye:
 
 Para levantar toda la infraestructura contenerizada (este Frontend + la API en Spring Boot + MySQL), por favor visita el repositorio principal donde se encuentra el orquestador de Docker Compose:
 
-🔗 **[Repositorio Principal - Docker Compose](https://github.com)**
+🔗 **[Repositorio Principal - Docker Compose](https://github.com/PetterTorrez/stock-manager-orchestrator)**
 
 ---
 
