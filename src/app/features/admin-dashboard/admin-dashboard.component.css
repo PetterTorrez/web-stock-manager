@@ -1,0 +1,177 @@
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--accent);
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 1.75rem;
+  color: var(--primary);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.card-form,
+.card-table {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card-form h3,
+.card-table h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  color: var(--primary);
+  border-left: 4px solid var(--accent);
+  padding-left: 8px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.form-group textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.form-actions button[type='submit'] {
+  background: var(--primary);
+  color: white;
+}
+.form-actions button[type='submit']:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+table th {
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+table tr:hover td {
+  background: #f1f5f9;
+}
+
+.action-cell {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.btn-logout {
+  background: #222222;
+  color: white;
+}
+.btn-logout:hover {
+  background: #000000;
+}
+
+.btn-edit {
+  background: var(--accent);
+  color: #111111;
+}
+.btn-edit:hover {
+  background: var(--accent-hover);
+}
+
+.btn-delete {
+  background: var(--error);
+  color: white;
+}
+.btn-delete:hover {
+  background: #901a1e;
+}
+
+.btn-cancel {
+  background: #6c757d;
+  color: white;
+}
+.btn-cancel:hover {
+  background: #5a6268;
+}
+
+.alert-error {
+  background: var(--error-bg);
+  color: var(--error);
+  padding: 16px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  border: 1px solid #fecaca;
+}
+
+.validation-msg {
+  display: block;
+  color: var(--error);
+  font-size: 0.75rem;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: var(--error);
+  background-color: var(--error-bg);
+}

@@ -17,4 +17,21 @@ export class ProductService {
       .get<ApiResponse<Product[]>>(`${this.apiUrl}/all`)
       .pipe(map((response) => response.data));
   }
+  createProduct(product: Product): Observable<Product> {
+    return this.http
+      .post<ApiResponse<Product>>(this.apiUrl, product)
+      .pipe(map((response) => response.data));
+  }
+
+  updateProduct(product: Product): Observable<Product> {
+    return this.http
+      .put<ApiResponse<Product>>(this.apiUrl, product)
+      .pipe(map((response) => response.data));
+  }
+
+  deleteProduct(id: number): Observable<void> {
+    return this.http
+      .delete<ApiResponse<void>>(`${this.apiUrl}/${id}`)
+      .pipe(map((response) => response.data));
+  }
 }

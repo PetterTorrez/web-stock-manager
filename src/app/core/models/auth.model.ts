@@ -1,3 +1,5 @@
+import { USER_ROL } from '../enum/role.enum';
+
 export interface LoginRequest {
   email: string;
   password: string;
@@ -12,7 +14,11 @@ export interface AuthResponse {
 
 export interface UserTokenPayload {
   userId: number;
-  role: 'ROLE_ADMIN' | 'ROLE_ANONYMOUS';
+  role: USER_ROL.ROLE_ADMIN | USER_ROL.ROLE_ANONYMOUS;
   sub: string;
   exp: number;
+}
+
+export interface ApiResponse<T> {
+  data: T;
 }

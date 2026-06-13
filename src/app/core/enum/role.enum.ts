@@ -1,0 +1,4 @@
+export enum USER_ROL {
+  ROLE_ADMIN = 'ROLE_ADMIN',
+  ROLE_ANONYMOUS = 'ROLE_ANONYMOUS',
+}
